@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-3" *ngIf = "user">
+    <app-dash-sidebar [user] = "user" ></app-dash-sidebar>
+  </div>
+  <div class="col-9" *ngIf = "user"  >
+    <app-dash-body [user] = "user" (myEvent)="ngOnInit()" ></app-dash-body>
+  </div>
+</div>
+<ul>
+  <li></li>
+</ul>

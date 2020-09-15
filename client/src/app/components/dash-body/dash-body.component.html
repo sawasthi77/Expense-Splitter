@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-7">
+      <h5>Recent Expenses</h5>
+      <br />
+      <table class="table table-hover table-sm table-custom">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngFor = "let expense of user.expenses" > 
+          <tr class="table-row">
+            <td>{{expense.createdAt | date: 'shortTime'}}</td>
+            <td><input matInput type="text"  [(ngModel)]="expense.description" matTooltip="Click to edit"></td>
+            <td><input matInput type="number" maxlength="8" class="amount" [(ngModel)]="expense.amount" 
+              (blur)="updateExpense(expense)"
+              matTooltip="Click to edit"></td>
+            <td>
+              <button mat-icon-button>
+                  <mat-icon (click)="deleteExpense(expense)" color="warn" matTooltip="Delete expense">delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-sm-12 col-md-8 col-lg-7 p-0">
+        <h6><strong>Total Expense: {{total_exp}}</strong></h6> 
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-7 card card-body">
+        <h6>Add Expense</h6>
+        <form class="row ">
+            <div class="col-md-7"><input name="description" [(ngModel)]="description" class="form-control" type="text" placeholder="Short Description"></div>
+            <div class="col-md-2 p-0" ><input name="amount" [(ngModel)]="amount" class="form-control" type="number" placeholder="$"></div>
+            <div class = "col-md-4">
+            <fieldset class="form-group">
+              <label>Select People</label><br/>
+              <select [(ngModel)]="selectedPeople" class="form-control">
+                <option disabled>--Select--</option>
+                <option *ngFor="let c of participantList" [value]="c">{{c}}
+                </option>
+              </select>
+            </fieldset>
+          </div>
+            <div class="col-md-10"><button mat-raised-button color="primary" class="btn btn-primary"  [disabled]="amount == null || description == null" (click)="addExpense()" >Add</button></div>
+        </form>
+        
+      </div>
+  </div>
+</div>
